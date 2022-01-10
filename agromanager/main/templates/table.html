@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="bg-dark container-fluid">
+    <div class="container border border-success rounded-pill" style="background: linear-gradient(306.97deg,
+    rgba(25, 135, 84, 0.2) -10.44%, rgba(0, 0, 0, 0) 113.26%, #198754 113.26%);">
+        <nav class="navbar " style="margin-left:20px; margin-top: 55px;">
+          <form class="container-fluid justify-content-start">
+            <a class="btn btn-success me-2" href="{% url 'table' %}">Мои поля</a>
+            <a class="btn btn-success me-2" href="#">Вегетация</a>
+            <a class="btn btn-success me-2" href="#">Погода</a>
+            <a class="btn btn-success me-2" href="#">Топливо</a>
+            <a class="btn btn-success me-2" href="{% url 'personal' %}" >Персонал</a>
+            <a class="btn btn-success me-2" href="#">Техника</a>
+            <li class="nav-item dropdown" style=" list-style-type: none;">
+                <a class="btn btn-success me-2" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Другое...
+                </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">Продукты в разработке</a></li>
+                  </ul>
+              </li>
+          </form>
+        </nav>
+    </div>
+
+        <div class=" bg-dark  container" style="margin-top: 5px; ">
+            <a class=" btn btn-success btn-lg "  href="{% url 'addcrop' %}" style="margin-top: 20px; margin-bottom: 5px;
+              width: 100%">Добавить поле</a>
+            {% for el in crop%}
+
+            <div class="row bg-dark bg-gradient border rounded" style="color: #DCDCDC;margin: 10px;" >
+
+                <div class="col-md-2" >
+                    <a href="{% url 'statistic_crop' el.namecrop %}" id="go_statistic"><!-- {% url 'statistic_crop' el.namecrop %}-->
+                    <img src="https://pbs.twimg.com/media/Dgtel0XU0AERQDl.jpg" style="width: 150px; hight: 150px; margin: 5px;">
+                    </a>
+                </div>
+                <div class="col-md-3" >
+                    <a style="font-size: 10pt;margin-left:10px;">Наименование:</a><br>
+                    <p class="text-center"  style="font-size: 14pt; margin-top: 15px;margin-left:10px;">{{ el.namecrop }}</p>
+                </div>
+                <div class="col-md-2" >
+                    <a style="font-size: 10pt;">Площадь, Га:</a><br>
+                    <p  class="text-center" style="font-size: 14pt;margin-top: 15px;">{{ el.area }}</p>
+                </div>
+                <div class="col-md-2" >
+                    <a style="font-size: 10pt;">Культура:</a><br>
+                    <p class="text-center" style="font-size: 14pt;margin-top: 15px;">{{ el.culture }}</p>
+                </div>
+                <div class="col-md-1" >
+                    <a style="font-size: 10pt;">NDVI:</a><br>
+                    <p class="text-center " style="font-size: 14pt; margin-top: 15px;">Рассчитываем...</p>
+                </div>
+
+                <div class="col-md-1" style="font-size: 40pt;">
+                    <p id="{{ el.idcrop}}" class="btn btn-outline-danger"  style="margin-top: 25px;margin-left:50px;"
+                       aria-current="page" onClick="foo(this.id);reload_interval(1000);">Удалить</p>
+
+                </div>
+
+            </div>
+
+            {% endfor %}
+
+
+        </div>
+</div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+function foo(paramId) {
+    var data_crop =paramId;
+
+    $.ajax({
+        type: 'GET',
+        contentType: 'application/json; charset=utf-8',
+        data:{"id_crop": data_crop},
+        dataType: 'text',
+    });
+};
+function reload_interval(time){
+	setTimeout(function(){
+		location.reload();
+	}, time);
+};
+
+</script>
+
+{% endblock content %}

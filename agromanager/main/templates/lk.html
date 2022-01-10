@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div style="">
+
+    <div class="container border border-success rounded-pill" style="background: linear-gradient(306.97deg,
+    rgba(25, 135, 84, 0.2) -10.44%, rgba(0, 0, 0, 0) 113.26%, #198754 113.26%);">
+        <nav class="navbar " style="margin-left:20px; margin-top: 55px;">
+          <form class="container-fluid justify-content-start">
+            <a class="btn btn-success me-2" href="{% url 'table' %}">Мои поля</a>
+            <a class="btn btn-success me-2" href="#">Вегетация</a>
+            <a class="btn btn-success me-2" href="#">Погода</a>
+            <a class="btn btn-success me-2" href="#">Топливо</a>
+            <a class="btn btn-success me-2" href="{% url 'personal' %}" >Персонал</a>
+            <a class="btn btn-success me-2" href="#">Техника</a>
+            <li class="nav-item dropdown" style=" list-style-type: none;">
+                <a class="btn btn-success me-2" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    Другое...
+                </a>
+                  <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                    <li><a class="dropdown-item" href="#">Продукты в разработке</a></li>
+                  </ul>
+              </li>
+          </form>
+        </nav>
+    </div>
+
+    <div id="container" style=" width:100% !important;height:25% !important;">
+        <canvas id="pie-chart"></canvas>
+    </div>
+
+</div>
+
+{% endblock content %}

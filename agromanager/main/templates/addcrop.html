@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+<div class="bg-dark" style="  position: fixed;top: 0;left: 0;width: 100%;height: 100%;" >
+    <div id="map" style="margin-top: 55px; margin-left: auto;
+        margin-right: auto; height:600px; width:70%"  ></div>
+    <div style="margin-left:auto;margin-right: auto; width:70%" >
+        <div class="input-group mb-3" style="margin-top:15px" >
+          <span class="input-group-text col-1 btn-success" id="inputGroup_name">Имя поля</span>
+          <input id="crop_name" type="text" class="form-control" aria-label="" aria-describedby="inputGroup-sizing-default">
+        </div>
+        <div class="input-group mb-3 ">
+            <label class="input-group-text col-1 btn-success" >Культура</label>
+                <select class="form-select" id="crop_culture">
+                <option selected>Выберите культуру...</option>
+                <option value="Бобовые">Бобовые</option>
+                <option value="Вика озимая">Вика озимая</option>
+                <option value="Вика яровая (посевная)">Вика яровая (посевная)</option>
+                <option value="Горох">Горох</option>
+                <option value="Горох озимый">Горох озимый</option>
+                <option value="Горохо-овсяная смесь">Горохо-овсяная смесь</option>
+                <option value="Горчица белая">Горчица белая</option>
+                <option value="Горчица сарептская">Горчица сарептская</option>
+                <option value="Гречиха">Гречиха</option>
+                <option value="Естественные луговые угодья">Естественные луговые угодья</option>
+                <option value="Капуста безголовчатая">Капуста безголовчатая</option>
+                <option value="Капуста брюссельская">Капуста брюссельская</option>
+                <option value="Капуста кочанная">Капуста кочанная</option>
+                <option value="Капуста цветная">Капуста цветная</option>
+                <option value="Картофель">Картофель</option>
+                <option value="Клевер">Клевер</option>
+                <option value="Кукуруза на зерно">Кукуруза на зерно</option>
+                <option value="Кукуруза на силос">Кукуруза на силос</option>
+                <option value="Кукуруза сахарная">Кукуруза сахарная</option>
+                <option value="Кукуруза семенная">Кукуруза семенная</option>
+                <option value="Лён">Лён</option>
+                <option value="Люцерна">Люцерна</option>
+                <option value="Овёс озимый">Овёс озимый</option>
+                <option value="Овёс щетинистый">Овёс щетинистый</option>
+                <option value="Овёс яровой">Овёс яровой</option>
+                <option value="Овсяница красная">Овсяница красная</option>
+                <option value="Овсяница луговая">Овсяница луговая</option>
+                <option value="Овсяница тростниковая">Овсяница тростниковая</option>
+                <option value="Однолетние травы">Однолетние травы</option>
+                <option value="Пар">Пар</option>
+                <option value="Пастбище">Пастбище</option>
+                <option value="Подсолнечник">Подсолнечник</option>
+                <option value="Полынь горькая">Полынь горькая</option>
+                <option value="Просо">Просо</option>
+                <option value="Пшеница двузернянка">Пшеница двузернянка</option>
+                <option value="Пшеница красная озимая">Пшеница красная озимая</option>
+                <option value="Пшеница красная яровая">Пшеница красная яровая</option>
+                <option value="Пшеница мягкая озимая">Пшеница мягкая озимая</option>
+                <option value="Пшеница мягкая яровая">Пшеница мягкая яровая</option>
+                <option value="Пшеница спельта">Пшеница спельта</option>
+                <option value="Пшеница твердая">Пшеница твердая</option>
+                <option value="Пшеница твердая озимая">Пшеница твердая озимая</option>
+                <option value="Пшеница твердая яровая">Пшеница твердая яровая</option>
+                <option value="Рапс озимый">Рапс озимый</option>
+                <option value="Рапс яровой">Рапс яровой</option>
+                <option value="Сидераты">Сидераты</option>
+                <option value="Соя">Соя</option>
+                <option value="Фацелия колокольчатая">Фацелия колокольчатая</option>
+                <option value="Фацелия пижмолистная">Фацелия пижмолистная</option>
+                <option value="Чечевица">Чечевица</option>
+                <option value="Чиа">Чиа</option>
+                <option value="Ячмень озимый">Ячмень озимый</option>
+                <option value="Ячмень яровой">Ячмень яровой</option>
+                <option value="Другое">Другое</option>
+                </select>
+        </div>
+
+        <div style="background-color: red;">
+            <a class=" btn btn-success btn-lg btn-block" href='#' id='export' style=" float: left;
+     line-height: 50px;
+     font-size: 15px;
+     color: white;
+     margin-top: 30px;
+     width: 300px;
+     margin-left:10%;margin-right: 10%;
+     text-align: center;">Сохранить поле</a>
+            <a class=" btn btn-success btn-lg btn-block" href="{% url 'table' %}" id='bak' style=" float: left;
+     line-height: 50px;
+     font-size: 15px;
+     color: white;
+     margin-top: 30px;
+     width: 300px;
+     margin-left:10%;margin-right: 10%;
+     text-align: center;">Вернуться к списку полей</a>
+        </div>
+    </div>
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+
+ <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+   integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+   crossorigin=""/>
+ <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+
+
+<!--Add draw plugin -->
+<link rel='stylesheet' href='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.css' />
+<script src='//api.tiles.mapbox.com/mapbox.js/plugins/leaflet-draw/v0.2.2/leaflet.draw.js'></script>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+document.getElementById('export').onclick = function(e) {
+var data = featureGroup.toGeoJSON();
+var data1=(JSON.stringify(data));
+var name_crop = document.getElementById('crop_name').value
+
+var culture_crop = document.getElementById('crop_culture').value
+console.log(name_crop);
+$.ajax({
+    type: 'GET',
+    contentType: 'application/json; charset=utf-8',
+    data: {data1,name_crop,culture_crop},
+    dataType: 'text',
+}
+);
+location.reload();
+};
+var map = L.map('map').setView([{{ pozy|safe }}, {{ pozx|safe }}], 11);
+L.tileLayer('https://api.mapbox.com/styles/v1/mapbox/satellite-streets-v11/tiles/{z}/{x}/{y}?access_token=pk.eyJ1Ijoic2tyaXB0eW0iLCJhIjoiY2t0b3E5YjgyMGZjczJ4bDR6YWRqd2RkYiJ9.xPPpzpZsLz2tYqzJjXi-5g', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+var featureGroup = L.featureGroup().addTo(map);
+var geojsonFeature ={{ geojson|safe }};
+L.geoJSON(geojsonFeature).addTo(map);
+
+var drawControl = new L.Control.Draw({
+    edit: {
+        featureGroup: featureGroup
+    }
+}).addTo(map);
+
+map.on('draw:created', function(e) {
+    featureGroup.addLayer(e.layer);
+});
+
+
+
+
+
+</script>
+
+
+
+{% endblock content %}
